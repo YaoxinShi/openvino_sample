@@ -1,0 +1,3 @@
+python "C:\Program Files (x86)\IntelSWTools\openvino_2021\deployment_tools\tools\model_downloader\downloader.py" --name alexnet
+"C:\Program Files (x86)\IntelSWTools\openvino_2021\bin\setupvars.bat"
+python "C:\Program Files (x86)\IntelSWTools\openvino_2021\deployment_tools\tools\model_downloader\converter.py" --name alexnet

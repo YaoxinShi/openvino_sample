@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C9B3D730-3423-3C5C-9D77-E1A4FC2AF78C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{9941C980-7E67-335C-BE37-29494EDB0751}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bmp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="format_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MnistUbyte.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="opencv_wraper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bmp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="format_reader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="format_reader_ptr.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="MnistUbyte.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv_wraper.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="register.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
