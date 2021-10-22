@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello_classification", "hel
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "format_reader", "common\format_reader\format_reader.vcxproj", "{D6A2AAD3-1B0F-3E91-BDBA-BE90504E7D6A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello_query_device", "hello_query_device\hello_query_device.vcxproj", "{A7E55A47-70B8-3907-B184-76593BC4AC77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -57,6 +59,18 @@ Global
 		{D6A2AAD3-1B0F-3E91-BDBA-BE90504E7D6A}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
 		{D6A2AAD3-1B0F-3E91-BDBA-BE90504E7D6A}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
 		{D6A2AAD3-1B0F-3E91-BDBA-BE90504E7D6A}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.Debug|x64.ActiveCfg = Debug|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.Debug|x64.Build.0 = Debug|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.Debug|x86.ActiveCfg = Debug|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.Release|x64.ActiveCfg = Release|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.Release|x64.Build.0 = Release|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.Release|x86.ActiveCfg = Release|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{A7E55A47-70B8-3907-B184-76593BC4AC77}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
