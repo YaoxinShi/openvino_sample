@@ -56,6 +56,7 @@ Available devices:
 ## hello_classification
 
 ```
+> unzip alexnet.zip.001
 > hello_classification.exe alexnet.xml banana.jpg CPU
 
 Top 10 results:
