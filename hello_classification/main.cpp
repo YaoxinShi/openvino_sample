@@ -17,7 +17,7 @@
 #include <atlcomcli.h>
 
 #define SURFACE_SHARE_OPENVINO 0
-#define SURFACE_SHARE_USER 1
+#define SURFACE_SHARE_USER 0
 
 using namespace InferenceEngine;
 
@@ -172,9 +172,16 @@ int main(int argc, char *argv[]) {
         auto remote_context = gpu::make_shared_context(ie, "GPU", g_pD3D11Device);
         ExecutableNetwork executable_network = ie.LoadNetwork(network, remote_context);
 #elif SURFACE_SHARE_OPENVINO
+        // https://docs.openvino.ai/2020.2/classInferenceEngine_1_1gpu_1_1D3DContext.html
+
         ExecutableNetwork executable_network = ie.LoadNetwork(network, "GPU");
-        auto d3d11_context = executable_network.GetContext();
-        //::Context ctx = std::dynamic_pointer_cast<cl::Context>(cldnn_context);
+        auto d3d11_context = executable_network.GetContext(); //d3d11_context is "RemoteContext::Ptr"
+        auto remote_context = std::dynamic_pointer_cast<gpu::D3DContext>(d3d11_context); // remote_context is "std::shared_ptr<InferenceEngine::gpu::D3DContext>"
+
+        ID3D11Device* g_pD3D11Device = *remote_context;
+        ID3D11DeviceContext* g_pD3D11Ctx = NULL;
+        g_pD3D11Device->GetImmediateContext(&g_pD3D11Ctx);
+        HRESULT hres = 0;
 #else
         ExecutableNetwork executable_network = ie.LoadNetwork(network, device_name);
 #endif
@@ -187,7 +194,7 @@ int main(int argc, char *argv[]) {
         // --------------------------- 6. Prepare input --------------------------------------------------------
         /* Read input image to a blob and set it to an infer request without resize and layout conversions. */
         cv::Mat image = imread_t(input_image_path);
-#if SURFACE_SHARE_USER
+#if (SURFACE_SHARE_USER || SURFACE_SHARE_OPENVINO)
         // create default surface
         D3D11_TEXTURE2D_DESC desc = { 0 };
         desc.Width = image.cols;
@@ -267,8 +274,6 @@ int main(int argc, char *argv[]) {
         // Model input_dims is 224x224, but pSurf is 300x300 (the same as input image)
         // Is this OK?
         Blob::Ptr imgBlob = make_shared_blob(tensorDesc, remote_context, pSurf);
-#elif SURFACE_SHARE_OPENVINO
-        Todo
 #else
         Blob::Ptr imgBlob = wrapMat2Blob(image);  // just wrap Mat data by Blob::Ptr without allocating of new memory
         infer_request.SetBlob(input_name, imgBlob);  // infer_request accepts input blob of any size
@@ -287,7 +292,7 @@ int main(int argc, char *argv[]) {
         classificationResult.print();
         // -----------------------------------------------------------------------------------------------------
 
-#if SURFACE_SHARE_USER
+#if (SURFACE_SHARE_USER || SURFACE_SHARE_OPENVINO)
         // release DirectX
         if (buffer)
         {
@@ -303,24 +308,24 @@ int main(int argc, char *argv[]) {
             pStagingSurf->Release();
             pStagingSurf = NULL;
         }
-        if (g_pAdapter) {
-            g_pAdapter->Release();
-            g_pAdapter = NULL;
-        }
         if (g_pD3D11Device) {
             g_pD3D11Device->Release();
             g_pD3D11Device = NULL;
         }
+#endif
+#if SURFACE_SHARE_USER
         if (g_pD3D11Ctx) {
             g_pD3D11Ctx->Release();
             g_pD3D11Ctx = NULL;
+        }
+        if (g_pAdapter) {
+            g_pAdapter->Release();
+            g_pAdapter = NULL;
         }
         if (g_pDXGIFactory) {
             g_pDXGIFactory->Release();
             g_pDXGIFactory = NULL;
         }
-#elif SURFACE_SHARE_OPENVINO
-        Todo
 #endif
     } catch (const std::exception & ex) {
         std::cerr << ex.what() << std::endl;
